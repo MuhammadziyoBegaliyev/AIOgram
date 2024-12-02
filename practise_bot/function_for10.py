@@ -27,4 +27,4 @@ kenglik: {message.location.latitude}
 uzunlik: {message.location.longitude}
 ----------------
 """
-    await message.answer("Joylashuv imkoniyatlari:"+ locatio_info)
+    await message.answer_contact("Joylashuv imkoniyatlari:"+ locatio_info)
