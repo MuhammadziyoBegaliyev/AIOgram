@@ -1,7 +1,7 @@
 from aiogram import Bot, Dispatcher , F 
 from asyncio import run 
 import chanel
-# import practie_function
+
 dp = Dispatcher()
 
 async def startup_answer(bot : Bot):
@@ -15,6 +15,7 @@ async def start():
     dp.shutdown.register(shutdown_answer)
     dp.message.register(chanel.cmd_start)
     dp.message.register(chanel.check_follow)
+    dp.callback_query.register(chanel.ok_answer)
     bot = Bot("7682918479:AAFIwfOI81ESlA1-KkZDyiueKX3_YrgL2Ik")
     await dp.start_polling(bot , polling_timeout=1)
 

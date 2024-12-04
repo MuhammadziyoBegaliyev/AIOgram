@@ -14,4 +14,4 @@ async def start():
     dp.startup.register(startup_answer)
     dp.shutdown.register(shutdown_answer)
 
-    bot = Bot("")
+    bot = Bot("7682918479:AAFIwfOI81ESlA1-KkZDyiueKX3_YrgL2Ik")

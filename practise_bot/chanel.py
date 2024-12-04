@@ -1,6 +1,6 @@
 from aiogram import types, Bot, Router ,F
 from aiogram.filters import Command
-
+from aiogram.types import CallbackQuery
 
 from joincode import get_channels_ikb ,channel_list
 main_router = Router()
@@ -33,3 +33,8 @@ async def check_follow(cb: types.CallbackQuery, bot: Bot):
             )
 
 
+
+async def ok_answer(CallBackData: CallbackQuery):
+    await CallBackData.answer('Azo bo`ldingiz', show_alert= True)
+    await CallBackData.message.delete()
+    
