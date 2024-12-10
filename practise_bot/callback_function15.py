@@ -1,21 +1,42 @@
 from aiogram.types import CallbackQuery
-
+import keyboards_for15
 async def callback_answer(callback: CallbackQuery):
-    if callback.message.text == "☎️":
-        if callback.data in "0+-*/=,":
-            await callback.answer(f"Siz ifodani {callback.data} buyrug`i boshlay olmaymiz",show_alert= True)
+    
+    
+    
+    if callback.message.text == "|":
+        if callback.data in "DC": await callback.answer(f"O`chirish uchun ifoda mavjud emas!",show_alert=True)
+        elif callback.data in "+-*/=,":
+            await callback.answer(f"❌Siz ifodani {callback.data} belgisi bilan boshlay olmaysiz ", show_alert=True)
         else:
-            await callback.message.edit_text(callback.data + callback.message.text)
+            await callback.message.edit_text(callback.data + callback.message.text,reply_markup=keyboards_for15.calc_builder)
     else:
-        if callback.data == "=" and "+" in callable.message.text or "-" in callable.message.text or"*" in callable.message.text or "/" in callable.message.text :
-            await callable.message.edit_text(
-                str(eval(callback.message.text))
-                )
+        if callback.data == "D":
+             await callback.message.edit_text(callback.message.text[:-2] + "|",reply_markup=keyboards_for15.calc_builder)
+        elif callback.data == "C":
+             await callback.message.edit_text("|",reply_markup=keyboards_for15.calc_builder )
+
+        elif (callback.message.text[-2].isdigit()) and callback.data == "=" and ("+" in callback.message.text or "-" in callback.message.text or "*" in callback.message.text or "/" in callback.message.text):
+                ifoda = callback.message.text.replace(",",".")
+                await callback.message.edit_text(
+                    str(eval(ifoda[:-1])) + "|",
+                    reply_markup=keyboards_for15.calc_builder
+                    )
         elif callback.data == "=":
-            await callback_answer("ifoda to`liq emas", show_alert=True)
-                
-        elif callback.message.text[-2].isdigit():
+                await callback.answer("Ifoda to`liq emas !", show_alert=True)
+            
+        elif callback.message.text[-2].isdigit() or callback.data.isdigit():
+             await callback.message.edit_text(  
+                  callback.message.text[:-1] + callback.data + callback.message.text[-1],
+                  reply_markup=keyboards_for15.calc_builder
+             )
+        elif callback.data in "+-*/":
             await callback.message.edit_text(
-                callback.message.text[:-1]+ callback.data + callback.message.text[-1]
+                 callback.message.text[:-2] + callback.data + "|",
+                 reply_markup= keyboards_for15.calc_builder
             )
-       
+        elif callback.data == ",":
+             await callback.answer("Notogri buyruq kiritdingiz !", show_alert=True)
+            
+
+
