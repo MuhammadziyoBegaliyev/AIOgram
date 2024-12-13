@@ -1,5 +1,6 @@
 from aiogram import Bot, Dispatcher, F
 from asyncio import run 
+from aiogram.client.session.aiohttp import AiohttpSession
 import function_for15
 import callback_function15
   
@@ -18,7 +19,8 @@ async def start():
     dp.message.register(function_for15.open_calc_answer)
     dp.callback_query.register(callback_function15.callback_answer)
 
-    bot = Bot("7975356285:AAEtEG5Hi1KOXB4xko2np2R0Bt3mYnkgCEQ")
+    session = AiohttpSession(proxy="http://proxy.server:3128/")
+    bot = Bot("7975356285:AAEtEG5Hi1KOXB4xko2np2R0Bt3mYnkgCEQ", session=session)
     await dp.start_polling(bot, polling_timeout=1)
 
 
